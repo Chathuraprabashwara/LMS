@@ -68,13 +68,14 @@ export const authApi = apiSlice.injectEndpoints({
 			},
 		}),
 		socialAuth: builder.mutation({
-			query: ({ email, name, avatar }) => ({
+			query: ({ email, name, avatar,isSocialAuth}) => ({
 				url: 'social-auth',
 				method: 'POST',
 				body: {
 					email,
 					name,
 					avatar,
+					isSocialAuth
 				},
 				credentials: 'include' as const,
 			}),

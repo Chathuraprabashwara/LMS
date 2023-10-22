@@ -20,6 +20,9 @@ const SideBarProfile: FC<Props> = ({
 	avatar,
 	logOuthandler,
 }) => {
+
+	const isSocialAuth= !user?.isSocialAuth
+	
 	return (
 		<div className="w-full">
 			<div
@@ -29,8 +32,10 @@ const SideBarProfile: FC<Props> = ({
 				onClick={() => setActive(1)}
 			>
 				<Image
-					src={user.avatar || avatar ? user.avatar || avatar : avatarDefault}
+					src={user.avatar || avatar ? user.avatar.url || avatar : avatarDefault}
 					alt="avatar"
+					width={20}
+					height={20}
 					className="w-[20px] h-[20px 800px:w-[30px] 800px:h-[30px] cursor-pointer rounded-full"
 				/>
                 <h5 className='pl-2 800px:block hidden font-Poppins text-black dark:text-white'>
@@ -39,9 +44,9 @@ const SideBarProfile: FC<Props> = ({
 			</div>
             <div
 				className={`w-full flex items-center px-3 py-4 cursor-pointer rounded-[5px] ${
-					active === 2 ? 'dark:bg-slate-800 bg-[#f2eded]' : 'bg-transparent'
+					active === 2 && isSocialAuth ? 'dark:bg-slate-800 bg-[#f2eded]' : !isSocialAuth ? "line-through" :"'bg-transparent'"
 				}`}
-				onClick={() => setActive(2)}
+				onClick={() => {isSocialAuth && setActive(2)}}
 			>
                 <RiLockPasswordLine className="text-black dark:text-white"size={20}  />
                 <h5 className='pl-2 800px:block hidden font-Poppins text-black dark:text-white'>

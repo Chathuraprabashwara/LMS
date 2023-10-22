@@ -3,7 +3,8 @@ import React, { FC, useState } from 'react';
 import SideBarProfile from './SideBarProfile';
 import { useLogoutQuery } from '../../../redux/features/Auth/authApi';
 import { signOut } from 'next-auth/react';
-import { redirect } from 'next/navigation';
+import ProfileInfo from './ProfileInfo';
+import ChangePassword from './ChangePassword'
 
 type Props = {
 	user: any;
@@ -17,6 +18,7 @@ const Profile: FC<Props> = ({ user }) => {
 		skip: !logout ? true : false,
 	});
 
+	console.log("user", user)
 	const [active, setActive] = useState(1);
 
 	const logOutHandler = async () => {
@@ -49,6 +51,19 @@ const Profile: FC<Props> = ({ user }) => {
 					logOuthandler={logOutHandler}
 				/>
 			</div>
+			{active === 1 && (
+				<div className="w-full h-full bg-transparent mt-[80px]">
+					<ProfileInfo
+						avatar={avatar}
+						user={user}
+					/>
+				</div>
+			)}
+			{active === 2 && !user?.isSocialAuth && (
+				<div className="w-full h-full bg-transparent mt-[80px]">
+					<ChangePassword />
+				</div>
+			)}
 		</div>
 	);
 };

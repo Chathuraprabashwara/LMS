@@ -41,7 +41,7 @@ export default function RootLayout({
 						>
 							<Custom>{children}</Custom>
 							<Toaster
-								position="top-right"
+								position="top-center"
 								reverseOrder={false}
 							/>
 						</ThemeProvider>

@@ -44,11 +44,12 @@ const Header: FC<Props> = ({ activeItem, setOpen, open, route, setRoute }) => {
 					email: data?.user?.email,
 					name: data?.user?.name,
 					avatar: data?.user?.image,
+					isSocialAuth:true
 				});
 			}
 		}
 
-		if (data === null) {
+		if (data === null && !user) {
 			setLogout(true);
 		}
 	}, [data, user]);
@@ -65,7 +66,7 @@ const Header: FC<Props> = ({ activeItem, setOpen, open, route, setRoute }) => {
 
 	useEffect(()=>{
 		if (isSuccess) {
-			toast.success('Login Successfully d');
+			toast.success('Login Successfully');
 		}
 
 	},[isSuccess])
@@ -111,9 +112,12 @@ const Header: FC<Props> = ({ activeItem, setOpen, open, route, setRoute }) => {
 							{user ? (
 								<Link href={'/profile'}>
 									<Image
-										src={user.avatar ? user.avatar : avatar}
+										src={user.avatar ? user.avatar.url : avatar}
 										alt="profile-pic"
-										className="w-[30px] h-[30px] rounded-full cursor-pointer"
+										className="w-[35px] h-[35px] rounded-full cursor-pointer"
+										style={{border:activeItem ===5 ? "2px solid #ffc107" : "2px solid #37a39a"}}
+										width={35}
+										height={35}
 									/>
 								</Link>
 							) : (

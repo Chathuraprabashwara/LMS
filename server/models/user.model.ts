@@ -15,6 +15,7 @@ export interface IUser extends Document {
 	};
 	role: string;
 	isVerified: boolean;
+	isSocialAuth:boolean;
 	courses: Array<{ coueseId: string }>;
 	comparePassword: (password: string) => Promise<boolean>;
 	SignAccessToken: () => string;
@@ -52,6 +53,10 @@ const userSchema: Schema<IUser> = new mongoose.Schema(
 			default: 'user',
 		},
 		isVerified: {
+			type: Boolean,
+			default: false,
+		},
+		isSocialAuth:{
 			type: Boolean,
 			default: false,
 		},
